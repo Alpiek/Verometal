@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_emails_tree" model="ir.actions.act_window">
+        <field name="name">Emails</field>
+        <field name="res_model">mail.message</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <menuitem name="Emails"
+              id="emails__menu_root"
+              sequence="70"
+              action="action_emails_tree"
+              web_icon="mail,static/description/icon.png" />
+</odoo>

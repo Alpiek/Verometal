@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="model">res.partner</field>
+        <field name="type">form</field>
+        <field type="xml" name="arch">
+            <xpath expr="//notebook/page[last()]" position="after">
+                <page string="Company tree" name="company_tree">
+                    <group>
+                        <field name="v_parent_id" />
+                        <field name="v_child_ids" mode="tree,kanban">
+                            <tree>
+                                <field name="name" />
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//group[@name='sale']/field[@name='customer']" position="after">
+                <field name="team_id" />
+            </xpath>
+            <field name="country_id" position="attributes">
+                <attribute name="required">1</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
