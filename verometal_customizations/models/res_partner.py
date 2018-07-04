@@ -6,11 +6,11 @@ class ResPartner(models.Model):
 
     v_parent_id = fields.Many2one(
         'res.partner',
-        string='Parent company',
+        string='Business Partner',
         required=False
     )
     v_child_ids = fields.One2many(
         'res.partner',
         'v_parent_id',
-        string='Child companies'
+        string='Link Businesses'
     )

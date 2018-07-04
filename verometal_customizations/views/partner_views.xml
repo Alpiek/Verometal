@@ -7,7 +7,7 @@
         <field name="type">form</field>
         <field type="xml" name="arch">
             <xpath expr="//notebook/page[last()]" position="after">
-                <page string="Company tree" name="company_tree">
+                <page string="Related businesses" name="related_businesses">
                     <group>
                         <field name="v_parent_id" />
                         <field name="v_child_ids" mode="tree,kanban">
