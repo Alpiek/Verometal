@@ -6,6 +6,9 @@
         <field name="model">res.partner</field>
         <field name="type">form</field>
         <field type="xml" name="arch">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="x_typology" widget="many2many_tags" />
+            </xpath>
             <xpath expr="//notebook/page[last()]" position="after">
                 <page string="Related businesses" name="related_businesses">
                     <group>
