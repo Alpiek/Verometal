@@ -13,7 +13,10 @@
                 <page string="Related businesses" name="related_businesses">
                     <group>
                         <field name="v_parent_id" />
-                        <field name="v_child_ids" mode="tree,kanban">
+                        <field name="v_child_ids"
+                               mode="tree,kanban"
+                               widget="many2many"
+                               domain="[('id', '!=', id)]">
                             <tree>
                                 <field name="name" />
                             </tree>
