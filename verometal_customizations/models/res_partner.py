@@ -21,7 +21,7 @@ class ResPartner(models.Model):
     v_child_ids = fields.One2many(
         'res.partner',
         'v_parent_id',
-        string=_('Link Businesses')
+        string=_('Linked Businesses')
     )
     x_typology = fields.Many2many(
         'x_typology',
