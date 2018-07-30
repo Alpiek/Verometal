@@ -8,6 +8,9 @@ class Typology(models.Model):
         string=_('Name'),
         required=True
     )
+    color = fields.Integer(
+        string='Color Index'
+    )
 
 
 class ResPartner(models.Model):
