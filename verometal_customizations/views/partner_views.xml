@@ -34,4 +34,39 @@
             </field>
         </field>
     </record>
+
+    <!-- Typology tags -->
+    <record id="view_partner_typology_form" model="ir.ui.view">
+        <field name="name">Contact Typology</field>
+        <field name="model">x_typology</field>
+        <field name="arch" type="xml">
+            <form string="Contact Typology">
+                <group col="4">
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="view_partner_typology_list" model="ir.ui.view">
+        <field name="name">Contact Typology</field>
+        <field name="model">x_typology</field>
+        <field eval="6" name="priority"/>
+        <field name="arch" type="xml">
+            <tree string="Contact Typology">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_partner_typology_form" model="ir.actions.act_window">
+        <field name="name">Contact Typology</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">x_typology</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <menuitem id="menu_partner_typology_form"
+              action="action_partner_typology_form"
+              name="Contact Typology"
+              sequence="1" parent="contacts.res_partner_menu_config"/>
 </odoo>

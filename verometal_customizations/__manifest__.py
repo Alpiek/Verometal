@@ -8,6 +8,7 @@
     'author': "Alpiek",
     'website': "https://alpiek.nl/",
     'depends': [
+        'contacts',
         'mail',
         'sales_team',
     ],
