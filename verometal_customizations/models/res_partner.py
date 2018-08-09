@@ -2,7 +2,7 @@ from odoo import api, fields, models, _
 
 
 class Typology(models.Model):
-    _name = 'x_typology'
+    _name = 'typology'
 
     name = fields.Char(
         string=_('Name'),
@@ -26,7 +26,7 @@ class ResPartner(models.Model):
         'v_parent_id',
         string=_('Linked Businesses')
     )
-    x_typology = fields.Many2many(
-        'x_typology',
+    typology = fields.Many2many(
+        'typology',
         string=_('Typology')
     )
