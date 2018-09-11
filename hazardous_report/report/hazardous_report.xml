@@ -1,0 +1,13 @@
+<openerp>
+    <data>
+        <report
+            string="Hazardous Report"
+            id="hazardous_report"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            name="hazardous_report.hazardous_report"
+            file="hazardous_report"
+            print_report_name="'Hazardous report - %s - %s'  % (object.partner_id.name or '', object.name)"
+        />
+    </data>
+</openerp>
