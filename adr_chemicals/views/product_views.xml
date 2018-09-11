@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_template_only_form_view" model="ir.ui.view">
+        <field name="name">product.template.form</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="model">product.template</field>
+        <field name="type">form</field>
+        <field type="xml" name="arch">
+            <xpath expr="//page[last()]" position="after">
+                <page name="adr" string="ADR">
+                    <group>
+                        <field name="adr_is_adr" />
+                        <field name="adr_un" />
+                        <field name="adr_packaging_group" />
+                        <field name="adr_multiplicator" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
