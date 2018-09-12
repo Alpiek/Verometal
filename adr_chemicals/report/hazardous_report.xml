@@ -5,12 +5,12 @@
             id="hazardous_report"
             model="stock.picking"
             report_type="qweb-pdf"
-            name="hazardous_report.hazardous_report"
+            name="adr_chemicals.hazardous_report"
             file="hazardous_report"
             print_report_name="'Hazardous report - %s - %s'  % (object.partner_id.name or '', object.name)"
         />
 
-        <template id="hazardous_report.hazardous_report">
+        <template id="adr_chemicals.hazardous_report">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.external_layout">
