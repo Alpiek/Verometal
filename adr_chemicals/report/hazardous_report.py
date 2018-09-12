@@ -15,5 +15,6 @@ class HazardousReport(models.AbstractModel):
             'doc_ids': docids,
             'doc_model': report.model,
             'docs': self,
+            'hazardous_total': 100,
         }
-        return report_obj.render('module.report_name', docargs)
+        return report_obj.render('adr_chemicals.hazardous_report', docargs)
