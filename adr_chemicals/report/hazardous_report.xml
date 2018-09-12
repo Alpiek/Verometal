@@ -119,7 +119,7 @@
                                         </td>
 
                                         <td>
-                                            <span t-esc="move.product_id.weight * move.product_id.adr_multiplicator"/>
+                                            <span t-esc="move.product_id.weight.value * move.product_id.adr_multiplicator.value"/>
                                         </td>
                                     </tr>
                               </tbody>
