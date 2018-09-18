@@ -117,7 +117,7 @@
                                         </td>
 
                                         <td>
-                                            <span t-esc="move.product_id.weight * move.product_id.adr_multiplicator"/>
+                                            <span t-esc="move.product_qty * move.product_id.weight * move.product_id.adr_multiplicator"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -127,7 +127,7 @@
                                         <td></td>
                                         <td></td>
                                         <td><b>SUM:</b></td>
-                                        <td><span t-esc="sum(o.move_lines.filtered(lambda m: m.product_id.adr_is_adr).mapped(lambda r: r.product_id.weight * r.product_id.adr_multiplicator))"/></td>
+                                        <td><span t-esc="sum(o.move_lines.filtered(lambda m: m.product_id.adr_is_adr).mapped(lambda r: r.product_qty * r.product_id.weight * r.product_id.adr_multiplicator))"/></td>
                                     </tr>
                               </tbody>
                             </table>
