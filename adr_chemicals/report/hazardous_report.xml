@@ -1,0 +1,143 @@
+<openerp>
+    <data>
+        <report
+            string="Hazardous Report"
+            id="hazardous_report"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            name="adr_chemicals.adr_chemicals_hazardous_report"
+            file="hazardous_report"
+            print_report_name="'Hazardous report - %s - %s'  % (object.partner_id.name or '', object.name)"
+        />
+
+        <template id="adr_chemicals_hazardous_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div t-if="o.move_lines and o.move_lines[0].partner_id and o.move_lines[0].partner_id.id != o.partner_id.id">
+                                        <span><strong>Delivery Address:</strong></span>
+                                        <div t-field="o.move_lines[0].partner_id"
+                                            t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                                    </div>
+                                    <div t-if="o.picking_type_id.code != 'internal' and (not o.move_lines or not o.move_lines[0].partner_id) and o.picking_type_id.warehouse_id.partner_id">
+                                        <span><strong>Warehouse Address:</strong></span>
+                                        <div t-field="o.picking_type_id.warehouse_id.partner_id"
+                                            t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5 col-xs-offset-1">
+                                    <div t-if="o.picking_type_id.code=='incoming' and o.partner_id">
+                                        <span><strong>Partner Address:</strong></span>
+                                    </div>
+                                    <div t-if="o.picking_type_id.code=='internal' and o.partner_id">
+                                        <span><strong>Warehouse Address:</strong></span>
+                                    </div>
+                                    <div t-if="o.picking_type_id.code=='outgoing' and o.partner_id">
+                                        <span><strong>Customer Address:</strong></span>
+                                    </div>
+                                    <div t-if="o.partner_id" name="partner_header">
+                                        <div t-field="o.partner_id"
+                                           t-options='{"widget": "contact", "fields": ["name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                                        <p t-if="o.sudo().partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'TIN'"/>: <span t-field="o.sudo().partner_id.vat"/></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <img
+                                t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)"
+                                style="width:300px;height:50px" class="pull-right mb16"
+                                />
+                            <h1 t-field="o.name" class="mt0 pull-left"/>
+                            <div class="clearfix"/>
+                            <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th t-if="o.origin"><strong>Order (Origin)</strong></th>
+                                    <th><strong>State</strong></th>
+                                    <th><strong>Commitment Date</strong></th>
+                                    <th name="td_sched_date_h"><strong>Scheduled Date</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td t-if="o.origin">
+                                        <span t-field="o.origin"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.state"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.date"/>
+                                    </td>
+                                    <td name="td_sched_date">
+                                        <span t-field="o.scheduled_date"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            </table>
+                            <br/>
+                            <br/>
+                            <table class="table table-condensed" t-if="o.move_line_ids">
+                              <thead>
+                                <tr>
+                                    <th width="10%">UN Number</th>
+                                    <th width="10%">Designation</th>
+                                    <th width="10%">Quantity</th>
+                                    <th width="10%">Package Group</th>
+                                    <th width="10%">Weights</th>
+                                    <th width="10%">Multiplicator</th>
+                                    <th width="10%">Points acc. ADR 1.1.3.6</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                    <tr t-foreach="o.move_lines.filtered(lambda m: m.product_id.adr_is_adr).sorted(key=lambda m: m.product_id.id)" t-as="move">
+                                        <td>
+                                            <span t-field="move.product_id.adr_un"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="move.product_id.display_name"/>
+                                        </td>
+                                        <td>
+                                            <span t-if="move.product_qty" t-field="move.product_qty"/>
+                                            <span t-if="not move.product_qty" t-esc="move.product_uom._compute_quantity(move.quantity_done, move.product_id.uom_id, rounding_method='HALF-UP')"/>
+                                            <span t-field="move.product_id.uom_id" groups="product.group_uom"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="move.product_id.adr_packaging_group"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="move.product_id.weight"/>
+                                        </td>
+
+                                        <td>
+                                            <span t-field="move.product_id.adr_multiplicator"/>
+                                        </td>
+
+                                        <td>
+                                            <span t-esc="move.product_qty * move.product_id.weight * move.product_id.adr_multiplicator"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><b>SUM:</b></td>
+                                        <td><span t-esc="sum(o.move_lines.filtered(lambda m: m.product_id.adr_is_adr).mapped(lambda r: r.product_qty * r.product_id.weight * r.product_id.adr_multiplicator))"/></td>
+                                    </tr>
+                              </tbody>
+                            </table>
+                            <div t-else="">
+                                <h1>No hazardous entries to show</h1>
+                            </div>
+                        </div>
+                    </t>
+                 </t>
+             </t>
+        </template>
+    </data>
+</openerp>
