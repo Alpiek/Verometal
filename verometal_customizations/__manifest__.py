@@ -15,6 +15,7 @@
     'data': [
         'views/mail_views.xml',
         'views/partner_views.xml',
+        'security/ir.model.access.csv'
     ],
     'application': False,
     'license': u'OPL-1',
