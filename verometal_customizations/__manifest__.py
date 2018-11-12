@@ -11,11 +11,13 @@
         'contacts',
         'mail',
         'sales_team',
+        'sale'
     ],
     'data': [
         'views/mail_views.xml',
         'views/partner_views.xml',
-        'security/ir.model.access.csv'
+        'security/ir.model.access.csv',
+        'report/sale_order_delivery_slip_report.xml'
     ],
     'application': False,
     'license': u'OPL-1',
