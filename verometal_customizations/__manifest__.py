@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Verometal customizations',
-    'version': '11.0.0.1.0.0',
+    'version': '11.0.0.1.0.1',
     'description': """
     Verometal customizations.
     """,
