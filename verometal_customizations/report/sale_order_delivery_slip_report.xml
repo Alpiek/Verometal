@@ -32,13 +32,7 @@
                 </div>
 
                 <h2>
-                    <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
-                        <span t-if="doc.state not in ['draft','sent']">Order # </span>
-                        <span t-if="doc.state in ['draft','sent']">Quotation # </span>
-                    </t>
-                    <t t-if="env.context.get('proforma', False) or is_pro_forma">
-                        <span>Pro-Forma Invoice # </span>
-                    </t>
+                    <span>Order Delivery Slip # </span>
                     <span t-field="doc.name"/>
                 </h2>
 
@@ -77,7 +71,7 @@
                             <thead>
                                 <tr>
                                     <th>Description</th>
-                                    <th class="text-right">Quantity</th>
+                                    <th class="text-right">Delivered quantity</th>
                                 </tr>
                            </thead>
                            <tbody class="sale_tbody">
@@ -96,7 +90,7 @@
                                         <tr>
                                             <td><span t-field="l.name"/></td>
                                             <td class="text-right">
-                                                <span t-field="l.product_uom_qty"/>
+                                                <span t-field="l.qty_delivered"/>
                                                 <span t-field="l.product_uom" groups="product.group_uom"/>
                                             </td>
                                         </tr>
