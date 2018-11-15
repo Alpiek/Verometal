@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Verometal customizations',
-    'version': '11.0.0.1.0.0',
+    'version': '11.0.0.1.0.2',
     'description': """
     Verometal customizations.
     """,
@@ -11,11 +11,13 @@
         'contacts',
         'mail',
         'sales_team',
+        'sale'
     ],
     'data': [
         'views/mail_views.xml',
         'views/partner_views.xml',
-        'security/ir.model.access.csv'
+        'security/ir.model.access.csv',
+        'report/sale_order_delivery_slip_report.xml'
     ],
     'application': False,
     'license': u'OPL-1',
